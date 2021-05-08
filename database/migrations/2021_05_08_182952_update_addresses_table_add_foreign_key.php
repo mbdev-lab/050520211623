@@ -14,8 +14,8 @@ class UpdateAddressesTableAddForeignKey extends Migration
     public function up()
     {
         Schema::table('addresses', function (Blueprint $table) {
-            $table->foreign('city')->references('id')->on('cities');
-            $table->foreign('area')->references('id')->on('areas');
+            $table->foreignId('city')->references('id')->on('cities');
+            $table->foreignId('area')->references('id')->on('areas');
         });
     }
 
@@ -27,8 +27,8 @@ class UpdateAddressesTableAddForeignKey extends Migration
     public function down()
     {
         Schema::table('addresses', function (Blueprint $table) {
-            $table->dropForeign('city');
-            $table->dropForeign('area');
+            $table->dropConstrainedForeignId('city');
+            $table->dropConstrainedForeignId('area');
         });
     }
 }
