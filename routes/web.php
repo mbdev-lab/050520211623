@@ -16,7 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/address/create', [AddressController::class, 'create']);
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [AddressController::class, 'index']);
