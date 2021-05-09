@@ -162,41 +162,46 @@
                         <div class="uofb cf">
                             <div class="l_col adrs">
                                 <h2>Add New Address</h2>
-
-                                <form action="" method="">
+                                    @foreach ($errors->all() as $error)
+                                        <div>{{ $error }}</div>
+                                    @endforeach
+                                <form method="POST" action="/address/create">
+                                    @csrf
                                     <div class="field">
                                         <label>Name *</label>
-                                        <input type="text" value="" palceholder="" class="vl_empty" />
+                                        <input name="name" value="{{ old('name') }}" type="text" class="@error('name') is-invalid @enderror">
                                     </div>
                                     <div class="field">
                                         <label>Your city *</label>
-                                        <select class="vl_empty">
-                                            <option class="plh"></option>
-                                            <option value="1">City 1</option>
-                                            <option value="2">City 2</option>
+                                        <select class="vl_empty" name="city">
+                                            <option value="">Empty</option>
+                                            @foreach  ($cities as $item)
+                                                <option value="{{ $item->id }}" @if(old('area') && old('area') == $item->id) selected @endif>{{ $item->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="field">
                                         <label>Your area *</label>
-                                        <select>
-                                            <option class="plh"></option>
-                                            <option>Area 1</option>
-                                            <option>Area 2</option>
+                                        <select name="area">
+                                            <option value="">Empty</option>
+                                            @foreach  ($areas as $item)
+                                                <option value="{{ $item->id }}" @if(old('area') && old('area') == $item->id) selected @endif>{{ $item->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
                                     <div class="field">
                                         <label>Street</label>
-                                        <input type="text" value="" palceholder="" class="vl_empty" />
+                                        <input type="text" value="{{ old('street') }}" palceholder="" class="vl_empty" name="street"/>
                                     </div>
                                     <div class="field">
                                         <label>House # </label>
-                                        <input type="text" value="" palceholder="House Name / Number" />
+                                        <input type="text" value="{{ old('house') }}" palceholder="House Name / Number" name="house" />
                                     </div>
 
                                     <div class="field">
                                         <label class="pos_top">Additional information</label>
-                                        <textarea></textarea>
+                                        <textarea name="additional_information" vallue="{{ old('additional_information') }}"></textarea>
                                     </div>
 
                                     <div class="field">
